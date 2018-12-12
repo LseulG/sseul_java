@@ -15,6 +15,7 @@ public class DBLoginEx {
 
 	public static void main(String[] args) {
 		new dblogin();
+		/* wow */
 	}
 
 }
