@@ -38,9 +38,7 @@ public class F01_BeepPrintEx {
 				
 			}
 		}
-		
 	}
-
 }
 
 class BeepTask implements Runnable {

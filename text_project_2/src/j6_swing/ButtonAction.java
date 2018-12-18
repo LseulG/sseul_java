@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ButtonAction {
 	static int cnt = 0;
@@ -16,8 +17,9 @@ public class ButtonAction {
 		btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				++cnt;
-				btn.setText(String.valueOf(cnt));
+//				++cnt;
+//				btn.setText(String.valueOf(cnt));
+				JOptionPane.showMessageDialog(null, "yoyo");
 			}
 		});
 		
