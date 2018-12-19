@@ -41,7 +41,8 @@ public class Test1 extends JFrame implements ActionListener{
 		mntmItem_1 = new JMenuItem("item2");
 		mnMenu_1.add(mntmItem_1);
 		
-		contentPane.add("item1", new Item1_p());
+		//contentPane.add("item1", new Item1_p());
+		contentPane.add("item1", new Item111());
 		contentPane.add("item2", new Item2_p());
 		
 		add(contentPane);		
