@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class JtableEx2 extends JFrame implements ActionListener {
+public class JtableEx1 extends JFrame implements ActionListener {
 	JLabel lab;
 	DefaultTableModel secTabModel;
 	JTable secTab;
@@ -39,10 +39,10 @@ public class JtableEx2 extends JFrame implements ActionListener {
 	private JButton btnBtn;
 
 	public static void main(String[] args) {
-		new JtableEx2();
+		new JtableEx1();
 	}
 
-	public JtableEx2() {
+	public JtableEx1() {
 		EtchedBorder eborder;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 300);
@@ -82,22 +82,30 @@ public class JtableEx2 extends JFrame implements ActionListener {
 				{ "판매", "003", "선택", "선택", "88000", "3", "1", "88000", "등록" },
 				{ "판매", "004", "선택", "선택", "88000", "3", "1", "88000", "등록" } };
 		secTabModel = new DefaultTableModel(secData, secTabName);
-		secTab = new JTable(secTabModel);
+		secTab = new JTable(secTabModel) {
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+				Component compo = super.prepareRenderer(renderer, row, column);
+				
+				if(!isRowSelected(row)) {
+					String type = (String)getModel().getValueAt(row, 2);
+					if(type.equalsIgnoreCase("선택")) {
+						//compo.setBackground(Color.RED);
+						compo.setForeground(Color.RED);
+					} else {
+						//compo.setBackground(Color.BLUE);
+						compo.setForeground(Color.BLUE);
+					}
+				}
+				return compo;
+			}
+		};
 
 		TableCellEditor editor = new DefaultCellEditor(divCB);
 		secTab.getColumnModel().getColumn(0).setCellEditor(editor);
 
 		Object value = editor.getCellEditorValue();
 		System.out.println("Selected value = " + value);
-
-		// 색상추가
-		TableCellRenderer renderer = new MyTableCellRenderer();
-		try {
-			secTab.setDefaultRenderer(Class.forName("java.lang.Object"), renderer);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		secSc = new JScrollPane(secTab);
 		secSc.setPreferredSize(new Dimension(450, 100));
@@ -130,35 +138,3 @@ public class JtableEx2 extends JFrame implements ActionListener {
 
 }
 
-class MyTableCellRenderer extends DefaultTableCellRenderer {
-	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-			int row, int column) {
-		Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-//		if (!isSelected) {
-//			if(row %2 == 0) {
-//				cell.setForeground(Color.RED);
-//			} else {
-//				cell.setForeground(Color.BLUE);
-//			}
-
-//			String s = table.getModel().getValueAt(row, column).toString();
-//			if (s.equalsIgnoreCase("선택택") && column == 2) {
-//				cell.setForeground(Color.RED);
-//			} else {
-//				cell.setForeground(Color.BLUE);
-//			}
-//		}
-		
-		if (column == 2) {
-			if (value.equals("선택택")) {
-				cell.setForeground(Color.RED);
-			} else {
-				cell.setForeground(Color.BLUE);
-			}
-		}
-
-		return cell;
-	}
-}
