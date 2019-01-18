@@ -1,0 +1,16 @@
+package test5;
+
+public class SonataArrayTest {
+
+	public static void main(String[] args) {
+		String arry[][] = { { "Èò»ö", "5000", "NF", "½Â¿ë" }, { "Àº»ö", "7000", "Brilliant", "¾÷¹«" },
+				{ "°¨È«»ö", "4000", "EF", "ÅÃ½Ã" }, { "°ËÁ¤»ö", "6000", "Hybrid", "½Â¿ë" } };
+
+		for (int i = 0; i < arry.length; i++) {
+			Sonata sona = new Sonata(arry[i][0], Integer.parseInt(arry[i][1]), arry[i][2], arry[i][3]);
+			System.out.println(sona.toString());
+		}
+
+	}
+
+}
